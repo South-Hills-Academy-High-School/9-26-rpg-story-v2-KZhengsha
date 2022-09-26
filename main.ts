@@ -14,6 +14,17 @@ namespace AnyProp {
     export const Choice1 = AnyProp.create()
     export const Choice2 = AnyProp.create()
 }
+/**
+ * Old Man Emotions
+ * 
+ * 1-normal
+ * 
+ * 2-angry
+ * 
+ * 3-happy
+ * 
+ * 4-thunder
+ */
 // Cloud portraits:
 // 
 // 0 = happy
@@ -55,6 +66,9 @@ controller.up.onEvent(ControllerButtonEvent.Pressed, function () {
         updateChoices()
     }
 })
+/**
+ * Start
+ */
 function createConversation () {
     startScript = createScript("Mr. Kao", "IT'S SO HOT! I NEED SOME WATER!", 1)
     nextPage = createScript("Pineapple", "You didn't pay your water bill! Now feel the thunder!", 1)
@@ -96,6 +110,14 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
         printCurrentScript()
     }
 })
+function noMoneyForYou () {
+    nomoneyforyou1 = createScript("Mr. Kao", "I'm tired of you asking me for money! GO AWAY!", 2)
+    nomoenyforyou2 = createScript("Pineapple", "Okay, I'll give you a deal! Buy two get one free!", 3)
+    nomoneyforyou3 = createScript("Pineapple", "$4 for 2 waters and Cheetos!! :)", 0)
+    blockObject.setAnyProperty(nomoneyforyou1, AnyProp.NextPage, nomoenyforyou2)
+    blockObject.setAnyProperty(nomoenyforyou2, AnyProp.NextPage, nomoneyforyou3)
+    return nomoneyforyou1
+}
 function finalChoice () {
     FinalChoice1 = createScript("Old Man", "Well, I just need enough water for this garden here", 0)
     FinalChoice2 = createScript("Cloud", "I can make that happen! What's the magic word?", 0)
@@ -144,6 +166,7 @@ function imAnOldMan () {
     blockObject.setAnyProperty(oldman1, AnyProp.NextPage, oldman2)
     blockObject.setStringArrayProperty(oldman2, StrArrayProp.Choices, ["OK here's $2!", "NO MONEY FOR YOU!!"])
     blockObject.setAnyProperty(oldman2, AnyProp.Choice1, happyEnding())
+    blockObject.setAnyProperty(oldman2, AnyProp.Choice1, noMoneyForYou())
     return oldman1
 }
 controller.down.onEvent(ControllerButtonEvent.Pressed, function () {
@@ -165,6 +188,9 @@ let oldman1: blockObject.BlockObject = null
 let printingStuff = false
 let FinalChoice2: blockObject.BlockObject = null
 let FinalChoice1: blockObject.BlockObject = null
+let nomoneyforyou3: blockObject.BlockObject = null
+let nomoenyforyou2: blockObject.BlockObject = null
+let nomoneyforyou1: blockObject.BlockObject = null
 let makingChoice = false
 let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
