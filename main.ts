@@ -55,7 +55,12 @@ function happyEnding () {
     return happy1
 }
 function imSorry () {
-	
+    imsorry1 = createScript("Mr. Kao", "I'm sorry I already spend all my money away", 0)
+    imsorry2 = createScript("Pineapple", "Okay, then gave me all the stuff worth money", 1)
+    imsorry3 = createScript("Mr. Kao", "Okay", 0)
+    blockObject.setAnyProperty(imsorry1, AnyProp.NextPage, imsorry2)
+    blockObject.setAnyProperty(imsorry2, AnyProp.NextPage, imsorry3)
+    return imsorry1
 }
 // microsoft/arcade-block-objects
 // 
@@ -75,7 +80,7 @@ function createConversation () {
     blockObject.setAnyProperty(startScript, AnyProp.NextPage, nextPage)
     blockObject.setStringArrayProperty(nextPage, StrArrayProp.Choices, ["I'm an old man!", "I'm sorry :("])
     blockObject.setAnyProperty(nextPage, AnyProp.Choice1, imAnOldMan())
-    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, 0)
+    blockObject.setAnyProperty(nextPage, AnyProp.Choice2, imSorry())
     currentScript = startScript
 }
 function printScript (name: string, text: string, portrait: number) {
@@ -196,6 +201,9 @@ let currentScript: blockObject.BlockObject = null
 let nextPage: blockObject.BlockObject = null
 let startScript: blockObject.BlockObject = null
 let choiceIndex = 0
+let imsorry3: blockObject.BlockObject = null
+let imsorry2: blockObject.BlockObject = null
+let imsorry1: blockObject.BlockObject = null
 let happy4: blockObject.BlockObject = null
 let happy3: blockObject.BlockObject = null
 let happy2: blockObject.BlockObject = null
